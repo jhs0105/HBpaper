@@ -38,3 +38,11 @@
   $shadow: unquote($shadow);
   text-shadow: $shadow;
 }
+
+@mixin icon($content) {
+  &:after {
+    content: $content;
+    font-family: "FontAwesome";
+    @content;
+  }
+}

@@ -3,3 +3,307 @@
 
 //변수사용하면 한번에 바뀌니 편하다.
 //swiper쓸때는 li에 클래스 줘서 사용. 이 외에는 li에 클래스 잘 안준다.
+
+#main-visual {
+  //height: 100vh;
+  overflow: hidden;
+
+  li {
+    position: relative;
+    &.visual01 .img {
+      background-image: url("../images/main/mv_01.jpg");
+    }
+    &.visual02 .img {
+      background-image: url("../images/main/mv_02.jpg");
+    }
+    &.swiper-slide-active {
+      //활성화 하는 slide를 의미한다
+      .img {
+        transform: scale(1);
+      }
+    }
+    .img {
+      height: 100vh;
+      background-position: 50%;
+      background-repeat: no-repeat;
+      background-size: cover;
+      transition: all 5s ease;
+      transform: scale(1.2);
+      transition-delay: 1s;
+      // scale이 작아지고 그 후 1초 뒤에 이미지 바뀌도록 delay주는 것이 좋다!
+    }
+    .txt {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      color: #fff;
+      z-index: 2;
+      font-size: $h3;
+      transform: translate(-50%, -50%); //앞이 x 뒤는 y (넓이의 반 만큼 앞으로 이동한다. 그래서 화면 정중앙으로 간다)
+      text-align: center;
+      strong {
+        font-weight: 700;
+        font-size: $h1 * 1.5;
+        margin-top: 30px;
+        display: block;
+      }
+    }
+  }
+}
+.section {
+  //full-page를 쓰면 알아서 가운데 정렬되니깐 아래꺼 안써줘도 된다. 자동으로 100vh를 맞춰준다.
+  // display: flex;
+  // align-items: center; //높이를 줘야 가운데 보낼 수 있다.
+  // height: 100vh;
+  .title-box {
+    margin-bottom: 50px;
+    h2 {
+      font-size: $h4;
+      font-weight: 500;
+      color: $main-color;
+    }
+    p {
+      font-size: $h2;
+      font-weight: 500;
+      margin-top: 30px;
+      line-height: 1.25;
+    }
+  }
+  .circle-txt {
+    position: absolute;
+    z-index: 2;
+    right: 80px;
+    top: 0;
+    font-size: $h2;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5em; //em을 사용한다! 1em = 한글자
+    color: #ccc;
+    animation: circle-ani 15s linear infinite;
+  }
+}
+
+#business {
+  overflow: hidden;
+  .container {
+    position: relative;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+    li {
+      &:nth-last-child(1) {
+        margin-top: -50px;
+      }
+      img {
+        border-radius: 20px;
+      }
+      .txt {
+        margin-top: 40px;
+        h3 {
+          font-size: $h3;
+          font-weight: 700;
+        }
+        p {
+          font-size: 18px;
+          margin-top: 20px;
+        }
+      }
+    }
+  }
+}
+
+@keyframes circle-ani {
+  //돌아가는 animation!
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+#product {
+  overflow: hidden;
+  //클래스보다 아이디가 더 우선적용된다.
+
+  .title-box {
+    p {
+      font-size: $h4;
+      font-weight: 400;
+    }
+    strong {
+      display: block;
+      font-size: $h2;
+      font-weight: 700;
+      margin-top: 50px;
+    }
+    a {
+      text-transform: uppercase;
+      display: block;
+      font-size: $h4;
+      font-weight: 500;
+      margin-top: 50px;
+      &:after {
+        content: "\f061";
+        font-family: "FontAwesome";
+        margin-left: 30px;
+      }
+    }
+  }
+  li {
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+  }
+  @for $i from 1 through 7 {
+    .product0#{$i} {
+      background-image: url("../images/main/ms3_0#{$i}.jpg");
+    }
+  }
+  .circle-txt {
+    right: 300px;
+    top: 200px;
+  }
+  .control-box {
+    position: absolute; //반드시 넓이를 줘야한다! 그래야 공간이 생겨서 container의 margin: auto가 적용된다!
+    width: 100%;
+    z-index: 2;
+    bottom: 100px;
+    .container {
+      display: flex;
+      align-items: center;
+    }
+    .btns {
+      margin-left: 30px;
+      button {
+        font-size: 22px;
+      }
+      .btn-play {
+        display: none;
+      }
+    }
+    .pagination-box {
+      position: relative;
+    }
+    .pagination {
+      .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        opacity: 1;
+        background-color: #fff;
+        border: 3px solid #111;
+        margin: 0;
+        margin-right: 50px; //순서대로..margin:0을 아래 쓰면 30px없어진다.
+
+        &-active {
+          background-color: #111;
+        }
+        &:nth-last-child(1) {
+          margin-right: 0;
+        }
+      }
+    }
+    .line {
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: #111;
+      top: 50%;
+      margin-top: -1px;
+      transform-origin: 0 50%; //왼쪽기준
+      transition: all 5s linear;
+    }
+  }
+}
+
+#news {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    .title-box {
+      p {
+        font-size: $h4;
+        font-weight: 400;
+      }
+      strong {
+        display: block;
+        font-size: $h2;
+        font-weight: 700;
+        margin-top: 50px;
+      }
+      a {
+        text-transform: uppercase;
+        display: block;
+        font-size: $h4;
+        font-weight: 500;
+        margin-top: 50px;
+        &:after {
+          content: "\f061";
+          font-family: "FontAwesome";
+          margin-left: 30px;
+        }
+      }
+    }
+    .contents-box {
+      // flex-grow: 1; //남아있는 여백을 다 가져가는(부모가 flex처리 되어 있고 flex-grow를 주면)
+      width: 1000px;
+      .notice {
+        display: flex;
+        padding: 30px 20px;
+        font-size: $h4;
+        border-top: 2px solid #111;
+        border-bottom: 1px solid #111;
+        .date {
+          margin-left: auto; //date만 오른쪽 끝에 보낼때(부모가 flex있고)
+        }
+        p {
+          font-weight: 500;
+          margin-left: 30px;
+        }
+      }
+      .notice-list-box {
+        padding: 30px 0;
+        border-bottom: 1px solid #111;
+
+        li {
+          background-image: url("../images/main/k_none.jpg");
+          background-size: cover;
+          border-radius: 20px;
+          overflow: hidden;
+
+          a {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 30px;
+            font-size: $h4;
+            background-color: rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: all 0.25s ease;
+            &:hover {
+              opacity: 1;
+            }
+            .sticker {
+              font-weight: 500;
+            }
+            p {
+              @include multiElilipsis;
+              margin-top: 20px;
+            }
+            .more {
+              @include icon("\f061") {
+                display: block;
+                margin-top: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
